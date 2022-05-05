@@ -241,7 +241,11 @@ fi
 
 ## Azure Portal
 
-Use the Azure portal to verify that the newly created pod uses a volume created by the persistent volume claim.
+Use the Azure portal to check the newly created pod:
+
+![Persistent Volume Claim](media/azure-portal-pod.png)
+
+Click the Volumes tab and then the persistent volume claim link to see the persistent volume claim.
 
 ![Persistent Volume Claim](media/azure-portal-pvc.png)
 
