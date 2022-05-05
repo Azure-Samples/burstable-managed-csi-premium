@@ -4,9 +4,21 @@
 namespace="burstable-csi"
 persistentVolumeClaimTemplate="pvc.yml"
 persistentVolumeClaimName="burstable-managed-csi-premium"
+storageClassTemplate="sc.yml"
 storageClassName="burstable-managed-csi-premium"
 podTemplate="pod.yml"
 podName="nginx"
+
+# Create the storage class if doesn't already exists in the cluster
+result=$(kubectl get sc -o jsonpath="{.items[?(@.metadata.name=='$storageClassName')].metadata.name}")
+
+if [[ -n $result ]]; then
+    echo "[$storageClassName] storage class already exists in the cluster"
+else
+    echo "[$storageClassName] storage class does not exist in the cluster"
+    echo "creating [$storageClassName] storage class in the cluster..."
+    kubectl apply -f $storageClassTemplate
+fi
 
 # Create the namespace if it doesn't already exists in the cluster
 result=$(kubectl get namespace -o jsonpath="{.items[?(@.metadata.name=='$namespace')].metadata.name}")
