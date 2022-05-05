@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: burstable-managed-csi-premium
+spec:
+  accessModes:
+  - ReadWriteOnce
+  storageClassName: burstable-managed-csi-premium
+  resources:
+    requests:
+      storage: 1Ti
