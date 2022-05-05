@@ -168,6 +168,28 @@ For mounting a volume in a Windows container, specify the drive letter and path.
 ...
 ```
 
+## Azure Portal
+
+Use the Azure portal to verify that the newly created pod uses a volume created by the persistent volume claim.
+
+![Persistent Volume Claim](media/azure-portal-pvc.png)
+
+Now open the managed disk resource under the node resource group of your AKS cluster:
+
+![Persistent Volume Claim](media/azure-portal-disk.png)
+
+In the overview page, you can observe:
+
+1) Disk size: is 1024 GiB == 1 TiB
+2) Disk sku: Premium SSD LRS
+3) Performance Tier: P30 – 5000 IOPS, 200 MBps
+
+As shown at [Premium SSD managed disks: Per-disk limits](https://docs.microsoft.com/en-us/azure/virtual-machines/disks-scalability-targets#premium-ssd-managed-disks-per-disk-limits), a P30 managed disk can burst up to 30,000 IOPS and 1,000 MB/sec. Now, if you click Configuration under Settings , you can see that on-demand bursting is enabled.
+
+![Persistent Volume Claim](media/azure-portal-bursting.png)
+
+Premium SSDs using the on-demand bursting model are charged an hourly burst enablement flat fee and transaction costs apply to any burst transactions beyond the provisioned target. For more information about the cost model and some examples, see [billing](https://docs.microsoft.com/en-us/azure/virtual-machines/disk-bursting#billing).
+
 ## Next Steps
 
 You can create custom storage classes and enable additional features in your persistent volumes. For example, you can use the [diskEncryptionSetID](https://github.com/kubernetes-sigs/azuredisk-csi-driver/blob/master/docs/driver-parameters.md) parameter to specify the resource id of the disk encryption set to use for enabling [server-side encryption of Azure managed disks](https://docs.microsoft.com/en-us/azure/virtual-machines/disk-encryption). For more information, see [Bring your own keys (BYOK) with Azure disks in Azure Kubernetes Service (AKS)](https://docs.microsoft.com/en-us/azure/aks/azure-disk-customer-managed-keys).
