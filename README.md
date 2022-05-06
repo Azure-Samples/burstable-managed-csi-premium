@@ -92,7 +92,7 @@ To define different tiers of storage, such as Premium and Standard, you can use 
 
 Unless you specify a StorageClass for a persistent volume, the default StorageClass will be used. Ensure volumes use the appropriate storage you need when requesting persistent volumes.
 
-> **Important**: Starting in Kubernetes version 1.21, AKS uses CSI drivers only and by default. IN this case, the `default` storage class is `managed-csi`.
+> **Important**: Starting in Kubernetes version 1.21, AKS uses CSI drivers only and by default. In this case, the `default` storage class is `managed-csi`.
 
 ## Burstable Managed CSI Premium Storage Class
 
