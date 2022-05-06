@@ -1,3 +1,21 @@
+---
+page_type: sample
+languages:
+- azurecli
+- bash
+- yaml
+products:
+- azure
+- azure-kubernetes-service
+- azure-storage
+- azure-blob-storage
+- azure-storage-accounts
+- azure-disk-storage
+name:  Create a Burstable Managed CSI Premium Storage Class
+description: This sample shows how to create a custom storage class that uses Azure Premium LRS to create a burstable managed disk. 
+urlFragment: burstable-managed-csi-premium
+---
+
 # Create a Burstable Managed CSI Premium Storage Class
 
 This sample shows how to create a custom storage class that uses [Azure Premium LRS](https://docs.microsoft.com/en-us/azure/virtual-machines/disks-types#premium-ssds) to dynamically create an [Azure burstable managed disk](https://docs.microsoft.com/en-us/azure/virtual-machines/disk-bursting) as a [persistent volume](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) using a [persistent volume claim](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistentvolumeclaims) in [Azure Kubernetes Service](https://docs.microsoft.com/en-us/azure/aks/).
@@ -74,8 +92,7 @@ To define different tiers of storage, such as Premium and Standard, you can use 
 
 Unless you specify a StorageClass for a persistent volume, the default StorageClass will be used. Ensure volumes use the appropriate storage you need when requesting persistent volumes.
 
-> [!IMPORTANT]
-> Starting in Kubernetes version 1.21, AKS uses CSI drivers only and by default. IN this case, the `default` storage class is `managed-csi`.
+> **Important**: Starting in Kubernetes version 1.21, AKS uses CSI drivers only and by default. IN this case, the `default` storage class is `managed-csi`.
 
 ## Burstable Managed CSI Premium Storage Class
 
@@ -97,8 +114,7 @@ volumeBindingMode: WaitForFirstConsumer
 allowVolumeExpansion: true
 ```
 
-> [!NOTE]
-> AKS reconciles the default storage classes and will overwrite any changes you make to those storage classes.
+> **Important**: AKS reconciles the default storage classes and will overwrite any changes you make to those storage classes.
 
 ## Persistent Volume Claims
 
